@@ -1,20 +1,9 @@
 package com.hospital_vm.cl.hospital_vm.model;
 
-import java.util.Date;
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Date;
 
 @Entity
 @Table(name = "atencion")
@@ -28,6 +17,7 @@ public class Atencion {
     private Long id;
 
     @Temporal(TemporalType.DATE)
+    @Column(name = "fecha_atencion", nullable = false)
     private Date fechaAtencion;
 
     @Column(nullable = false)
@@ -44,4 +34,3 @@ public class Atencion {
     @Column(length = 300)
     private String comentario;
 }
-
