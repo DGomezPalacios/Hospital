@@ -20,6 +20,10 @@ public class Atencion {
     @Column(name = "fecha_atencion", nullable = false)
     private Date fechaAtencion;
 
+    @Temporal(TemporalType.TIME)
+    @Column(name = "hora_atencion", nullable = true)
+    private Date horaAtencion;
+
     @Column(nullable = false)
     private Double costo;
 
