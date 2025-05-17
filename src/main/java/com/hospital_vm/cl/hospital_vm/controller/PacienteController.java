@@ -102,4 +102,13 @@ public class PacienteController {
         }
         return ResponseEntity.ok(pacientes);
     }
+    // 📊 Reporte: Total de costos agrupados por tipo de usuario
+@GetMapping("/reportes/costos-por-tipo")
+public ResponseEntity<List<Object[]>> reporteCostosPorTipoUsuario() {
+    List<Object[]> resultados = pacienteService.obtenerCostosTotalesPorTipoUsuario();
+    return resultados.isEmpty()
+            ? ResponseEntity.noContent().build()
+            : ResponseEntity.ok(resultados);
+}
+
 }

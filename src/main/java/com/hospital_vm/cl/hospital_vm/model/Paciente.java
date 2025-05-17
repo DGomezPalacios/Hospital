@@ -1,20 +1,10 @@
 package com.hospital_vm.cl.hospital_vm.model;
 
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.time.LocalDate;
 import java.util.List;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "paciente")
@@ -27,7 +17,7 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, length = 13, nullable = false)
+    @Column(nullable = false, unique = true, length = 13)
     private String run;
 
     @Column(nullable = false)
@@ -36,7 +26,6 @@ public class Paciente {
     @Column(nullable = false)
     private String apellido;
 
-    @Column(nullable = true)
     private LocalDate fechaNacimiento;
 
     @Column(nullable = false)
@@ -46,6 +35,9 @@ public class Paciente {
     @JoinColumn(name = "id_tipo")
     private TipoUsuario tipoUsuario;
 
-    @OneToMany(mappedBy = "paciente")
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL)
     private List<Atencion> atenciones;
+
+    @OneToOne(mappedBy = "paciente", cascade = CascadeType.ALL)
+    private FichaPaciente ficha;
 }

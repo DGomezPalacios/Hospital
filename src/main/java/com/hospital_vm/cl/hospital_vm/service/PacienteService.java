@@ -51,4 +51,8 @@ public class PacienteService {
     public List<Paciente> findByNombreAndApellido(String nombre, String apellido) {
         return pacienteRepository.findByNombreAndApellido(nombre, apellido);
     }
+
+    public List<Object[]> obtenerCostosTotalesPorTipoUsuario() {
+        return pacienteRepository.obtenerCostosTotalesPorTipoUsuario();
+    }
 }
