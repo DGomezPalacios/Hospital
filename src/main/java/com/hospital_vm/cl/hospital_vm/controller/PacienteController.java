@@ -103,12 +103,20 @@ public class PacienteController {
         return ResponseEntity.ok(pacientes);
     }
     // 📊 Reporte: Total de costos agrupados por tipo de usuario
-@GetMapping("/reportes/costos-por-tipo")
-public ResponseEntity<List<Object[]>> reporteCostosPorTipoUsuario() {
-    List<Object[]> resultados = pacienteService.obtenerCostosTotalesPorTipoUsuario();
-    return resultados.isEmpty()
+    @GetMapping("/reportes/costos-por-tipo")
+    public ResponseEntity<List<Object[]>> reporteCostosPorTipoUsuario() {
+        List<Object[]> resultados = pacienteService.obtenerCostosTotalesPorTipoUsuario();
+        return resultados.isEmpty()
             ? ResponseEntity.noContent().build()
             : ResponseEntity.ok(resultados);
 }
+    // 📋 Historial completo del paciente (ficha + atenciones)
+    @GetMapping("/{id}/historial")
+    public ResponseEntity<Paciente> historialCompleto(@PathVariable Long id) {
+        return pacienteService.findById(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
+}
+
 
 }
