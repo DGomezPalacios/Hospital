@@ -65,15 +65,15 @@ public class PacienteController {
         }
     }
 
-    // 🔍 Buscar por run
-    @GetMapping("/run/{run}")
+    //buscar por rut
+    @GetMapping("/rut/{rut}")
     public ResponseEntity<Paciente> buscarPorRun(@PathVariable String run) {
         return pacienteService.findByRun(run)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // 🔍 Buscar por correo
+    //buscar por correo
     @GetMapping("/correo/{correo}")
     public ResponseEntity<Paciente> buscarPorCorreo(@PathVariable String correo) {
         Paciente paciente = pacienteService.findByCorreo(correo);
@@ -83,7 +83,7 @@ public class PacienteController {
         return ResponseEntity.notFound().build();
     }
 
-    // 🔍 Buscar por apellido
+    //buscar por apellido
     @GetMapping("/apellido/{apellido}")
     public ResponseEntity<List<Paciente>> buscarPorApellido(@PathVariable String apellido) {
         List<Paciente> pacientes = pacienteService.findByApellido(apellido);
@@ -93,7 +93,7 @@ public class PacienteController {
         return ResponseEntity.ok(pacientes);
     }
 
-    // 🔍 Buscar por nombre y apellido
+    //buscar por nombre y apellido
     @GetMapping("/nombre-apellido/{nombre}/{apellido}")
     public ResponseEntity<List<Paciente>> buscarPorNombreYApellido(@PathVariable String nombre, @PathVariable String apellido) {
         List<Paciente> pacientes = pacienteService.findByNombreAndApellido(nombre, apellido);
@@ -102,7 +102,7 @@ public class PacienteController {
         }
         return ResponseEntity.ok(pacientes);
     }
-    // 📊 Reporte: Total de costos agrupados por tipo de usuario
+    //total de costos
     @GetMapping("/reportes/costos-por-tipo")
     public ResponseEntity<List<Object[]>> reporteCostosPorTipoUsuario() {
         List<Object[]> resultados = pacienteService.obtenerCostosTotalesPorTipoUsuario();
@@ -110,7 +110,7 @@ public class PacienteController {
             ? ResponseEntity.noContent().build()
             : ResponseEntity.ok(resultados);
 }
-    // 📋 Historial completo del paciente (ficha + atenciones)
+    //historial paciente (ficha + atenciones)
     @GetMapping("/{id}/historial")
     public ResponseEntity<Paciente> historialCompleto(@PathVariable Long id) {
         return pacienteService.findById(id)

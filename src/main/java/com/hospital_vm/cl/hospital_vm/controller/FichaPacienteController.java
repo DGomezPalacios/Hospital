@@ -15,7 +15,7 @@ public class FichaPacienteController {
     @Autowired
     private FichaPacienteService fichaService;
 
-    // 🔍 Obtener ficha por ID
+
     @GetMapping("/{id}")
     public ResponseEntity<FichaPaciente> obtenerPorId(@PathVariable Long id) {
         Optional<FichaPaciente> ficha = fichaService.findById(id);
@@ -23,14 +23,12 @@ public class FichaPacienteController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 📝 Crear ficha nueva
     @PostMapping
     public ResponseEntity<FichaPaciente> crear(@RequestBody FichaPaciente ficha) {
         FichaPaciente nueva = fichaService.save(ficha);
         return ResponseEntity.status(201).body(nueva);
     }
 
-    // 🔁 Actualizar ficha
     @PutMapping("/{id}")
     public ResponseEntity<FichaPaciente> actualizar(@PathVariable Long id, @RequestBody FichaPaciente datos) {
         Optional<FichaPaciente> fichaOpt = fichaService.findById(id);
@@ -47,7 +45,7 @@ public class FichaPacienteController {
         return ResponseEntity.notFound().build();
     }
 
-    // 🗑️ Eliminar ficha
+
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminar(@PathVariable Long id) {
         return fichaService.delete(id)

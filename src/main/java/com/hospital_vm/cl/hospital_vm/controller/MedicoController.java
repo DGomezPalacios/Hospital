@@ -16,7 +16,6 @@ public class MedicoController {
     @Autowired
     private MedicoService medicoService;
 
-    // 🔍 Obtener todos los médicos
     @GetMapping
     public ResponseEntity<List<Medico>> listarMedicos() {
         List<Medico> medicos = medicoService.findAll();
@@ -26,7 +25,6 @@ public class MedicoController {
         return ResponseEntity.ok(medicos);
     }
 
-    // 🔍 Obtener médico por ID
     @GetMapping("/{id}")
     public ResponseEntity<Medico> obtenerMedicoPorId(@PathVariable Long id) {
         Optional<Medico> medicoOpt = medicoService.findById(id);
@@ -34,14 +32,12 @@ public class MedicoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // 📝 Crear médico
     @PostMapping
     public ResponseEntity<Medico> crearMedico(@RequestBody Medico medico) {
         Medico nuevo = medicoService.save(medico);
         return ResponseEntity.status(201).body(nuevo);
     }
 
-    // 🔁 Actualizar médico
     @PutMapping("/{id}")
     public ResponseEntity<Medico> actualizarMedico(@PathVariable Long id, @RequestBody Medico datosActualizados) {
         Optional<Medico> medicoOpt = medicoService.findById(id);
@@ -58,7 +54,6 @@ public class MedicoController {
         }
     }
 
-    // 🗑️ Eliminar médico
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarMedico(@PathVariable Long id) {
         if (medicoService.delete(id)) {
@@ -68,7 +63,6 @@ public class MedicoController {
         }
     }
 
-    // 📊 Reporte: Lista de médicos con especialidades
     @GetMapping("/reportes/especialidades")
     public ResponseEntity<List<Medico>> reporteEspecialidades() {
         List<Medico> medicos = medicoService.findAll();

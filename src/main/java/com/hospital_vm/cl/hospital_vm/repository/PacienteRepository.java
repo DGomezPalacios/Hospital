@@ -26,7 +26,7 @@ public interface PacienteRepository extends JpaRepository<Paciente, Long> {
     @Query(value = "SELECT * FROM paciente WHERE correo = :correo", nativeQuery = true)
     Paciente buscarPorCorreo(@Param("correo") String correo);
 
-    // Reporte de costos por tipo de usuario
+    // costos por tipo de suuario
     @Query("SELECT p.tipoUsuario.nombre, SUM(a.costo) " +
            "FROM Paciente p JOIN p.atenciones a " +
            "GROUP BY p.tipoUsuario.nombre")
