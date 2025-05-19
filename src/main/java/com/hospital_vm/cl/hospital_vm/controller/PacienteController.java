@@ -110,7 +110,7 @@ public class PacienteController {
             ? ResponseEntity.noContent().build()
             : ResponseEntity.ok(resultados);
 }
-    //historial paciente (ficha + atenciones)
+    //historial paciente
     @GetMapping("/{id}/historial")
     public ResponseEntity<Paciente> historialCompleto(@PathVariable Long id) {
         return pacienteService.findById(id)
